@@ -127,6 +127,18 @@ ON bookings.guest_id = users.user_id
 
 Avoid using same-name fields blindly (`property_id = property_id`) — instead, specify which table each belongs to.
 
+### Subquery
+- Wrote a subquery to retrieve all the properties whose average rating is greater than 4.0
+```sql
+SELECT p.name, AVG(r.rating) AS avg_rating
+FROM properties AS p
+INNER JOIN reviews AS r
+ON p.property_id=r.property_id
+GROUP BY p.name
+HAVING avg_rating > 4.0;
+```
+- I'm proud of myself 
+
 ---
 
 ### 🧾 Author
