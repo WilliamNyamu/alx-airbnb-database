@@ -14,6 +14,7 @@ SELECT
     b.check_in_date,
     b.check_out_date
 FROM bookings AS b
+WHERE pay.amount > 1 AND b.booking_id > 0
 INNER JOIN users AS u ON b.guest_id = u.user_id
 INNER JOIN properties AS p ON b.property_id = p.property_id
 LEFT JOIN payments AS pay ON b.booking_id = pay.booking_id;
