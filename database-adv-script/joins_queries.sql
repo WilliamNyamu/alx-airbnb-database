@@ -9,7 +9,8 @@ SELECT * FROM users INNER JOIN bookings ON user_id=guest_id;
 SELECT p.name, r.rating 
 FROM properties AS p 
 LEFT JOIN reviews AS r 
-ON p.property_id=r.property_id;
+ON p.property_id=r.property_id
+ORDER BY r.rating ASC;
 
 -- Performing a FULL OUTER JOIN to retrieve all users and their bookings 
 -- even if a USER does not have a Booking, or a Booking does not have a USER
