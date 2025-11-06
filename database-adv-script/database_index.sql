@@ -21,7 +21,7 @@ FROM users AS u
 INNER JOIN bookings AS b
   ON u.user_id = b.guest_id;
 
-ANALYZE FORMAT=JSON
+EXPLAIN ANALYZE
 SELECT 
   u.first_name, b.property_id
 FROM users AS u
