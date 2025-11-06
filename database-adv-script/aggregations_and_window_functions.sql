@@ -9,9 +9,17 @@ GROUP BY u.first_name, u.last_name;
 SELECT
   p.name AS property_name,
   COUNT(b.id) AS total_bookings,
-  RANK() OVER (ORDER BY COUNT(b.id) DESC) AS property_rank
+
+  -- Assigns the same rank to properties with equal booking counts
+  RANK() OVER (ORDER BY COUNT(b.id) DESC) AS property_rank,
+
+  -- Always gives a unique sequential number regardless of ties
+  ROW_NUMBER() OVER (ORDER BY COUNT(b.id) DESC) AS property_row_number
+
 FROM properties AS p
 LEFT JOIN bookings AS b
   ON p.property_id = b.property_id
+
 GROUP BY p.property_id, p.name
 ORDER BY property_rank;
+
