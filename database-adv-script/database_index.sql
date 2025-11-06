@@ -12,3 +12,18 @@ CREATE INDEX idx_properties_property_id ON properties (property_id);
 
 -- Optional: If you frequently search or sort by property name
 CREATE INDEX idx_properties_name ON properties (name);
+
+
+
+EXPLAIN SELECT 
+  u.first_name, u.last_name, b.property_id
+FROM users AS u
+INNER JOIN bookings AS b
+  ON u.user_id = b.guest_id;
+
+ANALYZE FORMAT=JSON
+SELECT 
+  u.first_name, b.property_id
+FROM users AS u
+INNER JOIN bookings AS b
+  ON u.user_id = b.guest_id;
