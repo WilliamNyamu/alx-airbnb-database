@@ -139,6 +139,26 @@ HAVING avg_rating > 4.0;
 ```
 - I'm proud of myself 
 
+### Applying window functions
+✅ Final Query
+SELECT
+  p.name AS property_name,
+  COUNT(b.id) AS total_bookings,
+  RANK() OVER (ORDER BY COUNT(b.id) DESC) AS property_rank
+FROM properties AS p
+LEFT JOIN bookings AS b
+  ON p.property_id = b.property_id
+GROUP BY p.property_id, p.name
+ORDER BY property_rank;
+
+💡 How It Works
+Clause	What it does
+LEFT JOIN	Ensures even properties with zero bookings are included.
+COUNT(b.id)	Counts how many bookings each property has.
+RANK() OVER (ORDER BY COUNT(b.id) DESC)	Assigns a rank — properties with the same number of bookings get the same rank.
+GROUP BY	Groups results by each unique property.
+ORDER BY property_rank	Displays in rank order.
+
 ---
 
 ### 🧾 Author
